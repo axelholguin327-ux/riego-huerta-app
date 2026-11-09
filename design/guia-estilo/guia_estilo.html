@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía de Estilo · Huerta Manzanos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0..1,0&display=block" rel="stylesheet">
+<style>
+:root{--verde:#2F7D4F;--verde-osc:#1F5A37;--verde-cla:#E3F1E7;--azul:#2F80ED;--azul-cla:#E6F0FD;--rojo:#D64545;--rojo-cla:#FBE9E9;--ambar:#F2994A;--ambar-cla:#FDF0E4;--exito:#27AE60;--fondo:#F4F7F2;--texto:#1C2B22;--texto-2:#5F6F66;--borde:#DCE5DC}
+@page{size:Letter;margin:14mm 14mm 16mm}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;color:var(--texto);font-size:10.5pt;line-height:1.45;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.ms{font-family:'Material Symbols Rounded';font-size:24px;line-height:1;display:inline-block;vertical-align:middle;font-feature-settings:'liga'}
+.cover{background:var(--verde);color:#fff;border-radius:16px;padding:22px 26px;margin-bottom:16px}
+.cover h1{font-size:26pt;font-weight:700}
+.cover p{opacity:.9;margin-top:4px}
+h2{font-size:15pt;color:var(--verde-osc);margin:22px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--verde-cla);break-after:avoid}
+h3{font-size:11pt;margin:14px 0 8px}
+p.lead{color:var(--texto-2);margin-bottom:10px}
+section{break-inside:auto}
+.sw,.icons,table,.layout,.cards,pre{break-inside:avoid}
+.pb{break-before:page}
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.c{border:1px solid var(--borde);border-radius:12px;overflow:hidden}
+.c i{display:block;height:44px}
+.c div{padding:7px 9px;font-size:8.5pt}
+.c b{display:block;font-size:9pt}
+.c code{font-family:Consolas,monospace;color:var(--texto-2)}
+table{width:100%;border-collapse:collapse;font-size:9.5pt}
+th{background:var(--verde);color:#fff;text-align:left;padding:6px 8px;font-weight:600}
+td{padding:6px 8px;border-bottom:1px solid var(--borde);vertical-align:middle}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn{height:44px;border-radius:12px;padding:0 18px;font-weight:600;font-size:10.5pt;display:inline-flex;align-items:center;gap:8px;border:0}
+.p{background:var(--verde);color:#fff}.s{background:#fff;color:var(--verde);border:1.5px solid var(--verde)}
+.d{background:#fff;color:var(--rojo);border:1.5px solid var(--rojo)}.t{background:none;color:var(--verde)}.x{background:var(--verde);color:#fff;opacity:.45}
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;font-size:8.5pt;font-weight:600}
+.cap{font-size:8.5pt;color:var(--texto-2);margin-top:4px;text-align:center}
+.icons{display:grid;grid-template-columns:repeat(8,1fr);gap:8px}
+.icons div{text-align:center;font-size:8pt;color:var(--texto-2);border:1px solid var(--borde);border-radius:10px;padding:8px 2px}
+.icons .ms{color:var(--verde);display:block;margin:0 auto 4px}
+.sp{display:flex;align-items:flex-end;gap:14px}
+.sp div{text-align:center;font-size:8.5pt;color:var(--texto-2)}
+.sp i{display:block;background:var(--verde);margin:0 auto 4px;border-radius:2px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.demo{background:var(--fondo);border-radius:12px;padding:14px}
+.card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 3px rgba(28,43,34,.08),0 1px 2px rgba(28,43,34,.04)}
+.input{height:44px;border:1.5px solid var(--borde);border-radius:12px;background:#fff;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--texto-2);font-size:10pt}
+.input.f{border-color:var(--verde);box-shadow:0 0 0 3px var(--verde-cla)}
+.input.e{border-color:var(--rojo)}
+.layout{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start}
+.phone{width:200px;height:400px;border:6px solid var(--texto);border-radius:26px;overflow:hidden;position:relative;background:var(--fondo);font-size:7pt}
+.phone .h{background:var(--verde);height:56px;color:#fff;padding:12px;font-weight:700;font-size:9pt}
+.phone .m{position:absolute;left:0;right:0;border:1px dashed var(--rojo);color:var(--rojo);text-align:center}
+.phone .n{position:absolute;bottom:0;left:0;right:0;height:34px;background:#fff;border-top:1px solid var(--borde)}
+.phone .cd{margin:8px;background:#fff;border-radius:8px;height:60px;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+ul{margin-left:18px}li{margin:3px 0}
+.ok{color:var(--exito);font-weight:700}
+footer{margin-top:20px;font-size:8.5pt;color:var(--texto-2);text-align:center}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>Guía de Estilo</h1>
+  <p>App móvil <b>Huerta Manzanos</b> · Sistema IoT de riego para huertas de manzana · v1.0 · Noviembre 2026</p>
+</div>
+<p class="lead">Esta guía define los colores, tipografía, iconografía, componentes y reglas de layout de la app. Todas las pantallas del prototipo y de la app en Flutter deben seguirla para que la interfaz sea consistente. En el código, los valores se declaran una sola vez como tokens: variables CSS en el prototipo y <code>ThemeData</code> en Flutter.</p>
+
+<section>
+<h2>1. Paleta de colores</h2>
+<p class="lead">El verde representa la huerta y es el color de marca. El azul se asocia con el agua, el rojo con la manzana y el ámbar con las advertencias.</p>
+<h3>Colores principales</h3>
+<div class="sw">
+  <div class="c"><i style="background:#2F7D4F"></i><div><b>Primario · Verde huerta</b><code>#2F7D4F</code><br>Header, botón principal, selección</div></div>
+  <div class="c"><i style="background:#1F5A37"></i><div><b>Primario oscuro</b><code>#1F5A37</code><br>Estado presionado, títulos de sección</div></div>
+  <div class="c"><i style="background:#E3F1E7"></i><div><b>Primario claro</b><code>#E3F1E7</code><br>Chips de éxito, foco de inputs</div></div>
+  <div class="c"><i style="background:#2F80ED"></i><div><b>Secundario · Azul agua</b><code>#2F80ED</code><br>Riego, Zona 1 en gráficas, info</div></div>
+</div>
+<h3>Acentos y estados</h3>
+<div class="sw">
+  <div class="c"><i style="background:#D64545"></i><div><b>Acento · Rojo manzana</b><code>#D64545</code><br>Detener, errores, cerrar sesión</div></div>
+  <div class="c"><i style="background:#F2994A"></i><div><b>Advertencia · Ámbar</b><code>#F2994A</code><br>Humedad baja, alarmas activas</div></div>
+  <div class="c"><i style="background:#27AE60"></i><div><b>Éxito</b><code>#27AE60</code><br>Confirmaciones, acceso RFID válido</div></div>
+  <div class="c"><i style="background:#FBE9E9"></i><div><b>Fondos de estado</b><code>#FBE9E9 · #FDF0E4 · #E6F0FD</code><br>Fondo de chips: error, aviso, info</div></div>
+</div>
+<h3>Neutros</h3>
+<div class="sw">
+  <div class="c"><i style="background:#F4F7F2"></i><div><b>Fondo</b><code>#F4F7F2</code><br>Fondo general de pantallas</div></div>
+  <div class="c"><i style="background:#FFFFFF"></i><div><b>Superficie</b><code>#FFFFFF</code><br>Cards, inputs, barra inferior</div></div>
+  <div class="c"><i style="background:#1C2B22"></i><div><b>Texto principal</b><code>#1C2B22</code><br>Títulos y valores</div></div>
+  <div class="c"><i style="background:#5F6F66"></i><div><b>Texto secundario</b><code>#5F6F66</code><br>Etiquetas, fechas, ayudas</div></div>
+</div>
+<p style="margin-top:8px;font-size:9pt">Contraste verificado (WCAG AA): texto blanco sobre #2F7D4F = 5.0:1 <span class="ok">✓</span> · #1C2B22 sobre #F4F7F2 = 13.7:1 <span class="ok">✓</span> · #5F6F66 sobre blanco = 5.3:1 <span class="ok">✓</span>. Los estados nunca se indican solo con color: siempre van acompañados de un texto o ícono.</p>
+</section>
+
+<section>
+<h2>2. Tipografía</h2>
+<p class="lead">Fuente única: <b>Inter</b> (Google Fonts, licencia libre). Es muy legible en pantallas pequeñas y sus números de ancho uniforme son ideales para lecturas de sensores. Como respaldo se usa la fuente del sistema (Roboto en Android, SF Pro en iOS).</p>
+<table>
+  <tr><th>Estilo</th><th>Tamaño / interlineado</th><th>Peso</th><th>Uso</th><th>Ejemplo</th></tr>
+  <tr><td>Display</td><td>28 / 32 px</td><td>Bold 700</td><td>Valores de sensores</td><td style="font-size:28px;font-weight:700">26°C</td></tr>
+  <tr><td>Título de pantalla</td><td>22 / 28 px</td><td>Bold 700</td><td>Header</td><td style="font-size:22px;font-weight:700">Control de riego</td></tr>
+  <tr><td>Título de card</td><td>16 / 22 px</td><td>SemiBold 600</td><td>Encabezado de secciones</td><td style="font-size:16px;font-weight:600">Humedad de suelo</td></tr>
+  <tr><td>Cuerpo</td><td>15 / 21 px</td><td>Regular 400</td><td>Texto general</td><td style="font-size:15px">Zona 2 · 18 %</td></tr>
+  <tr><td>Botón</td><td>15 / 20 px</td><td>SemiBold 600</td><td>Etiquetas de botón</td><td style="font-size:15px;font-weight:600;color:var(--verde)">Regar</td></tr>
+  <tr><td>Etiqueta</td><td>12 / 16 px</td><td>Regular / Medium</td><td>Captions, fechas, ayudas</td><td style="font-size:12px;color:var(--texto-2)">Actualizado hace 8 s</td></tr>
+  <tr><td>Navegación</td><td>11 / 14 px</td><td>Medium / Bold activo</td><td>Barra inferior</td><td style="font-size:11px;font-weight:700;color:var(--verde)">Panel</td></tr>
+</table>
+<ul style="margin-top:10px;font-size:9.5pt">
+  <li>Máximo 3 tamaños por pantalla, sin contar la barra inferior.</li>
+  <li>Las unidades (°C, %) van en 14 px y gris secundario, junto al valor.</li>
+  <li>No usar mayúsculas sostenidas, excepto en siglas (RFID, MQTT).</li>
+</ul>
+</section>
+
+<section>
+<h2>3. Iconografía</h2>
+<p class="lead"><b>Material Symbols Rounded</b>, tamaño 24 px (20 px dentro de inputs). Por defecto se usan con contorno, y rellenos (FILL 1) solo para la pestaña activa de la barra inferior. Sus formas redondeadas combinan con los bordes de las cards.</p>
+<div class="icons">
+  <div><span class="ms">grid_view</span>Panel</div><div><span class="ms">water_drop</span>Riego</div><div><span class="ms">notifications</span>Alarmas</div><div><span class="ms">monitoring</span>Historial</div>
+  <div><span class="ms">contactless</span>RFID</div><div><span class="ms">water_pump</span>Bomba</div><div><span class="ms">thermostat</span>Temperatura</div><div><span class="ms">memory</span>Dispositivo</div>
+  <div><span class="ms">error</span>Alerta</div><div><span class="ms">check_circle</span>Éxito</div><div><span class="ms">stop_circle</span>Detener</div><div><span class="ms">logout</span>Salir</div>
+  <div><span class="ms">sync</span>Actualizar</div><div><span class="ms">badge</span>Encargado</div><div><span class="ms">tune</span>Umbral</div><div><span class="ms">arrow_back</span>Regresar</div>
+</div>
+<p style="margin-top:8px;font-size:9pt">Los íconos dentro de listas van en un círculo de 36 px con el fondo claro de su estado (verde, rojo, ámbar o azul).</p>
+</section>
+
+<section class="pb">
+<h2>4. Botones y componentes</h2>
+<h3>Botones (alto 48 px, radio 12 px, texto SemiBold 15)</h3>
+<div class="row">
+  <button class="btn p"><span class="ms">water_drop</span>Primario</button>
+  <button class="btn s">Secundario</button>
+  <button class="btn d">Destructivo</button>
+  <button class="btn t">Texto</button>
+  <button class="btn x">Deshabilitado</button>
+</div>
+<table style="margin-top:10px">
+  <tr><th>Tipo</th><th>Cuándo usarlo</th></tr>
+  <tr><td>Primario (relleno verde)</td><td>La acción principal de la pantalla: Entrar, Regar, Guardar. Solo uno por pantalla o card.</td></tr>
+  <tr><td>Secundario (borde verde)</td><td>Acciones alternativas: Cancelar, Leer tarjeta, Reiniciar nodo.</td></tr>
+  <tr><td>Destructivo (borde rojo)</td><td>Acciones que detienen o eliminan: Detener riego, Cerrar sesión.</td></tr>
+  <tr><td>Texto</td><td>Enlaces de baja prioridad: ¿Olvidaste tu contraseña?</td></tr>
+</table>
+<p style="font-size:9pt;margin-top:6px">Estados: <b>presionado</b> escala 98 % · <b>hover</b> brillo +5 % · <b>deshabilitado</b> opacidad 45 % · <b>cargando</b> ícono girando y el texto cambia, por ejemplo a "Validando…". Área táctil mínima: 48 × 48 px.</p>
+
+<h3>Chips de estado (alto 26 px, radio total)</h3>
+<div class="row">
+  <span class="chip" style="background:var(--verde-cla);color:var(--verde-osc)">Regando · 42 s</span>
+  <span class="chip" style="background:#EEF2EE;color:var(--texto-2)">Válvula cerrada</span>
+  <span class="chip" style="background:var(--ambar-cla);color:#B5621B">Major</span>
+  <span class="chip" style="background:var(--rojo-cla);color:var(--rojo)">Inactiva</span>
+  <span class="chip" style="background:var(--azul-cla);color:#1E5FB8">Enviando…</span>
+</div>
+
+<h3>Campos de texto (alto 48 px, borde 1.5 px, radio 12 px)</h3>
+<div class="row" style="align-items:flex-start">
+  <div style="flex:1"><div class="input"><span class="ms" style="font-size:20px">mail</span>Normal</div><div class="cap">Normal</div></div>
+  <div style="flex:1"><div class="input f"><span class="ms" style="font-size:20px">mail</span>Con foco</div><div class="cap">Foco: borde verde + halo</div></div>
+  <div style="flex:1"><div class="input e"><span class="ms" style="font-size:20px">mail</span>Error</div><div class="cap" style="color:var(--rojo)">Error: borde y mensaje rojos</div></div>
+</div>
+
+<h3>Cards, diálogos y mensajes</h3>
+<div class="cards">
+  <div class="demo"><div class="card"><div style="font-size:9pt;color:var(--texto-2)">Temperatura</div><div style="font-size:24px;font-weight:700">26<span style="font-size:12px;color:var(--texto-2)">°C</span></div></div><div class="cap">Card: radio 16, padding 16, sombra nivel 1</div></div>
+  <div class="demo"><div class="card" style="border-radius:20px;box-shadow:0 8px 24px rgba(28,43,34,.18)"><b>¿Regar Zona 1?</b><div style="font-size:9pt;color:var(--texto-2)">Confirmación antes de acciones sobre el riego</div></div><div class="cap">Diálogo: radio 20, sombra nivel 2</div></div>
+  <div class="demo"><div style="background:#1C2B22;color:#fff;border-radius:12px;padding:10px 12px;font-size:9pt"><span class="ms" style="color:#7CE3A1;font-size:18px">check_circle</span> Tarjeta registrada</div><div class="cap">Toast: 2.6 s, sobre la barra inferior</div></div>
+</div>
+</section>
+
+<section class="pb">
+<h2>5. Espaciado, bordes y sombras</h2>
+<p class="lead">Retícula base de <b>4 px</b>. Todos los márgenes y separaciones son múltiplos de 4.</p>
+<div class="sp">
+  <div><i style="width:4px;height:4px"></i>4<br>s1</div><div><i style="width:8px;height:8px"></i>8<br>s2</div><div><i style="width:12px;height:12px"></i>12<br>s3</div>
+  <div><i style="width:16px;height:16px"></i>16<br>s4</div><div><i style="width:24px;height:24px"></i>24<br>s5</div><div><i style="width:32px;height:32px"></i>32<br>s6</div>
+  <div style="text-align:left;margin-left:20px;font-size:9.5pt;color:var(--texto)">• 16 px: margen lateral de pantalla y padding de cards<br>• 12 px: separación entre cards<br>• 8 px: separación entre botones y elementos relacionados<br>• 24 px: padding de diálogos y pantalla de login</div>
+</div>
+<table style="margin-top:12px">
+  <tr><th>Token</th><th>Valor</th><th>Aplicación</th></tr>
+  <tr><td>Radio card</td><td>16 px</td><td>Cards, banners</td></tr>
+  <tr><td>Radio botón / input</td><td>12 px</td><td>Botones, campos, toast, segmented control</td></tr>
+  <tr><td>Radio diálogo</td><td>20 px</td><td>Diálogos de confirmación</td></tr>
+  <tr><td>Radio chip / pill</td><td>999 px (total)</td><td>Chips, filtros (1 h / 24 h / 7 d)</td></tr>
+  <tr><td>Sombra nivel 1</td><td>0 1 3 rgba(28,43,34,.08)</td><td>Cards en reposo</td></tr>
+  <tr><td>Sombra nivel 2</td><td>0 8 24 rgba(28,43,34,.18)</td><td>Diálogos, toast, botón flotante</td></tr>
+  <tr><td>Borde</td><td>1.5 px #DCE5DC</td><td>Inputs y pills; divisores de lista de 1 px</td></tr>
+</table>
+</section>
+
+<section class="pb">
+<h2>6. Layout</h2>
+<div class="layout">
+  <div class="phone">
+    <div class="h">Header 72 px · verde</div>
+    <div class="cd"></div><div class="cd" style="height:90px"></div><div class="cd"></div>
+    <div class="m" style="top:56px;left:0;width:8px;height:300px;border-width:0 1px 0 0"></div>
+    <div class="n"></div>
+  </div>
+  <ul style="font-size:9.5pt">
+    <li><b>Base de diseño:</b> 390 × 844 px (iPhone 14 / Android mediano). El layout se adapta al ancho con columnas flexibles.</li>
+    <li><b>Header:</b> verde primario, título de 22 px y subtítulo de 12 px que da contexto (nodo, origen de los datos). Las pantallas secundarias muestran la flecha de regresar a la izquierda.</li>
+    <li><b>Contenido:</b> columna única con margen de 16 px; cards apiladas cada 12 px; desplazamiento vertical.</li>
+    <li><b>Barra inferior:</b> 64 px de alto con 5 pestañas fijas (Panel, Riego, Alarmas, Historial, Más). La pestaña activa usa el ícono relleno y el texto en verde Bold. Se oculta en el login.</li>
+    <li><b>Jerarquía:</b> el dato más importante va arriba y en grande (valores de sensores). Las acciones van abajo, al alcance del pulgar.</li>
+    <li><b>Grid de métricas:</b> 2 columnas iguales, por ejemplo Temperatura y Humedad.</li>
+    <li><b>Confirmaciones:</b> toda acción que mueve agua (regar, cambiar modo) pide confirmación o muestra un toast con el resultado del comando RPC.</li>
+    <li><b>Modo oscuro:</b> fuera del alcance de esta versión; los tokens permiten agregarlo después.</li>
+  </ul>
+</div>
+</section>
+
+<section>
+<h2>7. Implementación en Flutter</h2>
+<pre style="font-family:Consolas,monospace;font-size:8.5pt;background:var(--fondo);border-left:4px solid var(--verde);padding:10px 12px;border-radius:8px;white-space:pre-wrap">final theme = ThemeData(
+  useMaterial3: true,
+  fontFamily: 'Inter',
+  colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2F7D4F),
+      primary: const Color(0xFF2F7D4F), secondary: const Color(0xFF2F80ED),
+      error: const Color(0xFFD64545), surface: Colors.white),
+  scaffoldBackgroundColor: const Color(0xFFF4F7F2),
+  cardTheme: CardThemeData(elevation: 1, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+  filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(
+      minimumSize: const Size.fromHeight(48),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))),
+);</pre>
+</section>
+<footer>Huerta Manzanos · Guía de Estilo v1.0 · Equipo: Axel Holguín Marrufo, Daniel Varela Legarreta, Reyes Fernando Zubía Arias</footer>
+</body>
+</html>
