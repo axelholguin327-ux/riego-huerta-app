@@ -8,9 +8,9 @@ Con la app, el encargado de la huerta consulta en tiempo real la humedad de suel
 
 ## Prototipo navegable
 
-👉 **https://TU-USUARIO.github.io/riego-huerta-app/**
+👉 **https://axelholguin327-ux.github.io/riego-huerta-app/**
 
-- Versión en baja fidelidad (wireframes): agrega `?modo=wireframe` a la dirección.
+- Versión en baja fidelidad (wireframes): https://axelholguin327-ux.github.io/riego-huerta-app/design/prototipo/?modo=wireframe
 - Se ve en un marco de teléfono en la computadora y en pantalla completa en el celular.
 
 ## Fase actual: arquitectura, modelo de datos y UI/UX
