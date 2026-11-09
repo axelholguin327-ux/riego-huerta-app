@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Diagramas · Huerta Manzanos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--verde:#2F7D4F;--verde-osc:#1F5A37;--verde-cla:#E3F1E7;--azul:#2F80ED;--azul-cla:#E6F0FD;--ambar:#F2994A;--ambar-cla:#FDF0E4;--rojo:#D64545;--texto:#1C2B22;--texto-2:#5F6F66;--borde:#DCE5DC}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:#fff;color:var(--texto)}
+.d{display:none;padding:40px;width:max-content}
+.d.on{display:block}
+h1{font-size:26px;color:var(--verde-osc);margin-bottom:6px}
+.sub{color:var(--texto-2);font-size:14px;margin-bottom:24px}
+
+/* ---------- Arquitectura en capas ---------- */
+.arq{display:grid;grid-template-columns:860px 330px;gap:28px;align-items:start}
+.layers{display:flex;flex-direction:column;gap:12px}
+.layer{border-radius:16px;padding:16px 18px;border:2px solid}
+.layer h2{font-size:15px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;display:flex;justify-content:space-between}
+.layer h2 small{font-size:12px;text-transform:none;letter-spacing:0;font-weight:500;opacity:.8}
+.boxes{display:flex;gap:10px;flex-wrap:wrap}
+.box{background:#fff;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.06)}
+.box span{display:block;font-weight:400;font-size:11.5px;color:var(--texto-2);margin-top:2px}
+.l1{background:var(--verde-cla);border-color:var(--verde)} .l1 h2{color:var(--verde-osc)}
+.l2{background:#EEF6F0;border-color:#5FA67A} .l2 h2{color:var(--verde-osc)}
+.l3{background:var(--azul-cla);border-color:var(--azul)} .l3 h2{color:#1E5FB8}
+.l4{background:var(--ambar-cla);border-color:var(--ambar)} .l4 h2{color:#A35614}
+.l5{background:#F3F3F3;border-color:#9AA59F} .l5 h2{color:#45524B}
+.arrow{text-align:center;color:var(--texto-2);font-size:12px;line-height:1}
+.arrow b{display:block;font-size:20px;color:#9AA59F}
+.side{display:flex;flex-direction:column;gap:12px}
+.note{border:1.5px dashed #9AA59F;border-radius:14px;padding:14px 16px;font-size:12.5px;line-height:1.45;color:var(--texto-2)}
+.note h3{font-size:13px;color:var(--texto);margin-bottom:6px}
+.note li{margin-left:16px}
+.flow{font-size:12.5px}
+.flow div{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.flow i{font-style:normal;min-width:22px;height:22px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
+
+/* ---------- Mermaid ---------- */
+.mm{background:#fff}
+</style>
+</head>
+<body>
+
+<!-- =================== ARQUITECTURA =================== -->
+<section class="d" id="arq">
+  <h1>Arquitectura de la solución · App Huerta Manzanos</h1>
+  <div class="sub">Aplicación híbrida (multiplataforma) en Flutter con arquitectura por capas</div>
+  <div class="arq">
+    <div class="layers">
+      <div class="layer l1"><h2>1 · Presentación <small>Flutter · Material 3 · Guía de estilo</small></h2>
+        <div class="boxes">
+          <div class="box">Login<span>Inicio de sesión</span></div>
+          <div class="box">Panel general<span>Dashboard</span></div>
+          <div class="box">Detalle de zona<span>Consulta</span></div>
+          <div class="box">Control de riego<span>Acción principal</span></div>
+          <div class="box">Alarmas</div>
+          <div class="box">Historial</div>
+          <div class="box">Tarjetas RFID<span>Consulta / registro</span></div>
+          <div class="box">Más / Dispositivo</div>
+        </div></div>
+      <div class="arrow"><b>⇅</b>eventos de UI · estado observable</div>
+      <div class="layer l2"><h2>2 · Lógica y estado <small>Riverpod (controladores / providers)</small></h2>
+        <div class="boxes">
+          <div class="box">AuthController<span>sesión y JWT</span></div>
+          <div class="box">TelemetryController<span>valores en vivo</span></div>
+          <div class="box">IrrigationController<span>modo, umbral, RPC</span></div>
+          <div class="box">AlarmController</div>
+          <div class="box">HistoryController</div>
+          <div class="box">RfidController</div>
+        </div></div>
+      <div class="arrow"><b>⇅</b>casos de uso → repositorios</div>
+      <div class="layer l3"><h2>3 · Datos <small>Repositorios + servicios</small></h2>
+        <div class="boxes">
+          <div class="box">ApiService (http)<span>REST + JWT al backend</span></div>
+          <div class="box">TelemetrySocket<span>WebSocket ThingsBoard</span></div>
+          <div class="box">Caché local (sqflite)<span>últimas lecturas offline</span></div>
+          <div class="box">SecureStorage<span>token cifrado</span></div>
+          <div class="box">PushService (FCM)<span>notificación de alarmas</span></div>
+        </div></div>
+      <div class="arrow"><b>⇅</b>HTTPS · WSS (Internet)</div>
+      <div class="layer l4"><h2>4 · Servicios en la nube</h2>
+        <div class="boxes">
+          <div class="box">API REST propia<span>Node.js + Express · JWT · bcrypt</span></div>
+          <div class="box">Base de datos MySQL<span>usuarios, RFID, riegos, alarmas, historial</span></div>
+          <div class="box">ThingsBoard Cloud<span>dispositivos, telemetría, RPC, Rule Engine</span></div>
+        </div></div>
+      <div class="arrow"><b>⇅</b>MQTT (v1/devices/me/telemetry · rpc · attributes)</div>
+      <div class="layer l5"><h2>5 · Dispositivo IoT en la huerta <small>firmware Arduino C++</small></h2>
+        <div class="boxes">
+          <div class="box">ESP32 DevKit<span>Wi-Fi · MQTT · lógica auto/manual</span></div>
+          <div class="box">DHT22<span>temp. y humedad amb.</span></div>
+          <div class="box">2× YL-69<span>humedad de suelo</span></div>
+          <div class="box">RC522<span>lector RFID</span></div>
+          <div class="box">Relés · 2 válvulas · bomba 12 V</div>
+        </div></div>
+    </div>
+    <div class="side">
+      <div class="note flow"><h3>Flujo principal: regar una zona</h3>
+        <div><i>1</i><span>El encargado presiona <b>Regar</b> en la app y confirma.</span></div>
+        <div><i>2</i><span>IrrigationController llama a la API REST con su JWT.</span></div>
+        <div><i>3</i><span>La API valida el rol, registra el EVENTO_RIEGO en MySQL y envía el RPC <code>setIrrigation</code> a ThingsBoard.</span></div>
+        <div><i>4</i><span>ThingsBoard reenvía el comando al ESP32 por MQTT.</span></div>
+        <div><i>5</i><span>El ESP32 abre la válvula y la bomba y publica la telemetría.</span></div>
+        <div><i>6</i><span>La app recibe el nuevo estado por WebSocket y actualiza la pantalla.</span></div>
+      </div>
+      <div class="note flow"><h3>Flujo de alarmas</h3>
+        <div><i>1</i><span>El Rule Engine detecta suelo &lt; 25 % y crea la alarma.</span></div>
+        <div><i>2</i><span>Un nodo REST API Call la envía a la API, que la guarda en MySQL.</span></div>
+        <div><i>3</i><span>La API manda una notificación push (FCM) a la app.</span></div>
+      </div>
+      <div class="note"><h3>¿Por qué una BD propia además de ThingsBoard?</h3>
+        ThingsBoard guarda la telemetría cruda. MySQL guarda la información de negocio: usuarios y roles, tarjetas RFID, eventos de riego con quién y cuánto se regó, y alarmas reconocidas. Así se pueden hacer consultas e historiales flexibles.</div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== DIAGRAMA ER =================== -->
+<section class="d" id="er">
+  <h1>Diagrama Entidad-Relación · Base de datos MySQL</h1>
+  <div class="sub">Notación pata de gallo · PK = llave primaria · FK = llave foránea · UK = valor único</div>
+  <pre class="mermaid mm">
+erDiagram
+  USUARIO ||--o{ HUERTA : "es propietario de"
+  HUERTA ||--|{ DISPOSITIVO : "tiene"
+  DISPOSITIVO ||--|{ ZONA : "controla"
+  DISPOSITIVO ||--o{ LECTURA : "registra"
+  LECTURA ||--|{ LECTURA_SUELO : "incluye"
+  ZONA ||--o{ LECTURA_SUELO : "se mide en"
+  USUARIO ||--o{ TARJETA_RFID : "posee"
+  TARJETA_RFID ||--|{ TARJETA_ZONA : "autoriza"
+  ZONA ||--o{ TARJETA_ZONA : "permitida en"
+  DISPOSITIVO ||--o{ ACCESO_RFID : "lee"
+  TARJETA_RFID |o--o{ ACCESO_RFID : "genera"
+  ZONA ||--o{ EVENTO_RIEGO : "recibe"
+  USUARIO |o--o{ EVENTO_RIEGO : "activa"
+  ACCESO_RFID |o--o| EVENTO_RIEGO : "origina"
+  DISPOSITIVO ||--o{ ALARMA : "genera"
+  ZONA |o--o{ ALARMA : "afecta"
+  USUARIO |o--o{ ALARMA : "reconoce"
+
+  USUARIO {
+    int id_usuario PK
+    varchar nombre
+    varchar email UK
+    varchar password_hash
+    enum rol "admin | encargado"
+    boolean activo
+    datetime creado_en
+  }
+  HUERTA {
+    int id_huerta PK
+    int id_propietario FK
+    varchar nombre
+    varchar ubicacion
+    decimal superficie_m2
+  }
+  DISPOSITIVO {
+    int id_dispositivo PK
+    int id_huerta FK
+    varchar nombre "nodo-huerta-01"
+    varchar tb_device_id UK
+    varchar firmware
+    enum modo "auto | manual"
+    enum estado "activo | inactivo"
+    datetime ultimo_contacto
+  }
+  ZONA {
+    int id_zona PK
+    int id_dispositivo FK
+    tinyint numero "1 | 2"
+    varchar nombre
+    tinyint umbral_humedad_pct
+    boolean valvula_abierta
+  }
+  LECTURA {
+    bigint id_lectura PK
+    int id_dispositivo FK
+    datetime fecha_hora
+    decimal temp_c
+    decimal hum_amb
+  }
+  LECTURA_SUELO {
+    bigint id_lectura PK, FK
+    int id_zona PK, FK
+    tinyint humedad_pct
+  }
+  TARJETA_RFID {
+    int id_tarjeta PK
+    int id_usuario FK
+    varchar uid UK
+    boolean activa
+    datetime fecha_alta
+  }
+  TARJETA_ZONA {
+    int id_tarjeta PK, FK
+    int id_zona PK, FK
+  }
+  ACCESO_RFID {
+    bigint id_acceso PK
+    int id_dispositivo FK
+    int id_tarjeta FK "nulo si no existe"
+    varchar uid_leido
+    boolean autorizado
+    enum accion "manual_irrigation | denied"
+    datetime fecha_hora
+  }
+  EVENTO_RIEGO {
+    bigint id_evento PK
+    int id_zona FK
+    int id_usuario FK "nulo si es automatico"
+    bigint id_acceso FK "nulo si no es RFID"
+    enum origen "auto | app | rfid | dashboard"
+    datetime inicio
+    datetime fin
+    smallint duracion_s
+    tinyint humedad_inicial
+    tinyint humedad_final
+  }
+  ALARMA {
+    bigint id_alarma PK
+    int id_dispositivo FK
+    int id_zona FK
+    varchar tipo
+    enum severidad "minor | major | critical"
+    enum estado "activa | reconocida | resuelta"
+    decimal valor
+    datetime creada_en
+    int reconocida_por FK
+    datetime resuelta_en
+  }
+  </pre>
+</section>
+
+<!-- =================== MAPA DE NAVEGACIÓN =================== -->
+<section class="d" id="nav">
+  <h1>Mapa de navegación de la app</h1>
+  <div class="sub">Flujo entre pantallas del prototipo · flechas sólidas = botón o acción · punteadas = pestañas de la barra inferior (Panel, Riego, Alarmas, Historial, Más)</div>
+  <pre class="mermaid mm">
+flowchart TB
+  L([Login]) -->|Entrar| P[Panel general]
+  P -->|Tocar zona| Z[Detalle de zona]
+  P -->|Campana o banner de alarma| A[Alarmas]
+  Z -->|Ir a control de riego| R[Control de riego]
+  R -->|Regar| D{{Confirmar riego}}
+  D -->|Confirmar / Cancelar| R
+  P -. barra inferior .-> R
+  P -. barra inferior .-> H[Historial]
+  P -. barra inferior .-> M[Más opciones]
+  M -->|Tarjetas RFID| T[Tarjetas RFID]
+  T -->|Registrar tarjeta| N[Registrar tarjeta]
+  N -->|Guardar| T
+  M -->|Dispositivo| DV[Dispositivo]
+  M -->|Cerrar sesión| C{{Confirmar salida}}
+  C -->|Cerrar sesión| L
+  classDef main fill:#E3F1E7,stroke:#2F7D4F,color:#1C2B22,stroke-width:2px
+  classDef sec fill:#E6F0FD,stroke:#2F80ED,color:#1C2B22
+  classDef dlg fill:#FDF0E4,stroke:#F2994A,color:#1C2B22
+  classDef start fill:#2F7D4F,stroke:#1F5A37,color:#fff
+  class P,R,A,H,M main
+  class Z,T,N,DV sec
+  class D,C dlg
+  class L start
+  </pre>
+</section>
+
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+const id = location.hash.slice(1) || 'arq';
+document.getElementById(id).classList.add('on');
+mermaid.initialize({
+  startOnLoad: false, theme: 'base', fontFamily: 'Inter, sans-serif',
+  themeVariables: {
+    primaryColor: '#E3F1E7', primaryBorderColor: '#2F7D4F', primaryTextColor: '#1C2B22',
+    lineColor: '#5F6F66', secondaryColor: '#F4F7F2', tertiaryColor: '#FFFFFF', fontSize: '15px'
+  },
+  er: { useMaxWidth: false, layoutDirection: 'TB', entityPadding: 12 },
+  flowchart: { useMaxWidth: false, curve: 'basis' }
+});
+await mermaid.run({ querySelector: `#${id} .mermaid` });
+document.body.dataset.listo = '1';
+</script>
+</body>
+</html>
