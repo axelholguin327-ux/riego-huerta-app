@@ -2,3 +2,6 @@ Thumbs.db
 .DS_Store
 *.raw.png
 ~$*
+
+# Firmware: credenciales locales
+firmware/**/secrets.h
